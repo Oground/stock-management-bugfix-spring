@@ -53,16 +53,20 @@ public class MemberController {
 	 */
 	@RequestMapping(value = "create")
 	public String create(@Validated MemberForm form, BindingResult result, Model model) {
-		if (result.hasErrors()){
-			return form();
-		}
 		Member member = new Member();
 		BeanUtils.copyProperties(form, member);
 		Member checkMember = memberService.findByMailAddress(member.getMailAddress());
 		
 		if(checkMember != null){
-			model.addAttribute("emailError", "既に登録されているメールアドレスです。他のメールアドレスを登録してください。");
-			return form();
+			result.rejectValue("mailAddress", null, "既に登録されているメールアドレスです。他のメールアドレスを登録してください。");
+		}
+		
+		if(!member.getPassword().equals(form.getCheckPassword())){
+			result.rejectValue("password", null, "入力されたパスワードとパスワード(確認用)が異なっています。再度入力し直してください。");
+		}
+		
+		if(result.hasErrors()){
+			return form();			
 		}
 		
 		memberService.save(member);

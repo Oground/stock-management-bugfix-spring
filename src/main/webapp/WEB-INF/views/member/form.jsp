@@ -21,7 +21,6 @@
 			      	メールアドレス
 			    </th>
 			    <td>
-			    	<c:if test="${emailError != null}"><c:out value="${emailError}"/><br></c:if>
 			    	<form:errors path="mailAddress" cssStyle="color:red" element="div"/>
 			    	<form:input path="mailAddress" placeholder="Email"/>
 			    </td>
@@ -31,8 +30,18 @@
 			     	 パスワード
 			    </th>
 			    <td>
+			    	<c:if test="${passError != null}"><pre><c:out value="${passError}"/></pre><br></c:if>
 			    	<form:errors path="password" cssStyle="color:red" element="div"/>
 			    	<form:password path="password" placeholder="Password"/>
+			    </td>
+			  </tr>
+			  <tr>
+			    <th>
+			     	 パスワード(確認用)
+			    </th>
+			    <td>
+			    	<form:errors path="checkPassword" cssStyle="color:red" element="div"/>
+			    	<form:password path="checkPassword" placeholder="Password(確認用)"/>
 			    </td>
 			  </tr>
 			  <tr>
