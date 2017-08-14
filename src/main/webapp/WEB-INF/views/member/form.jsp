@@ -30,7 +30,6 @@
 			     	 パスワード
 			    </th>
 			    <td>
-			    	<c:if test="${passError != null}"><pre><c:out value="${passError}"/></pre><br></c:if>
 			    	<form:errors path="password" cssStyle="color:red" element="div"/>
 			    	<form:password path="password" placeholder="Password"/>
 			    </td>
