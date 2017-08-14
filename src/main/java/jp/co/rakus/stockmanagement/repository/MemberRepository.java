@@ -32,6 +32,22 @@ public class MemberRepository {
 	@Autowired
 	private NamedParameterJdbcTemplate jdbcTemplate;
 	
+	public Member findByMailAddress(String mailAddress) {
+		SqlParameterSource param = new MapSqlParameterSource();
+		Member member = null;
+		try{
+			member = jdbcTemplate.queryForObject(
+					"SELECT id,name,mail_address,password FROM members WHERE mail_address= '"
+							+ mailAddress + "'",
+					param, 
+					MEMBER_ROW_MAPPER);
+			return member;
+		} catch(DataAccessException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
 	/**
 	 * メールアドレスとパスワードからメンバーを取得.
 	 * @param mailAddress メールアドレス

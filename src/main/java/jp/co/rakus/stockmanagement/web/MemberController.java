@@ -58,6 +58,13 @@ public class MemberController {
 		}
 		Member member = new Member();
 		BeanUtils.copyProperties(form, member);
+		Member checkMember = memberService.findByMailAddress(member.getMailAddress());
+		
+		if(checkMember != null){
+			model.addAttribute("emailError", "既に登録されているメールアドレスです。他のメールアドレスを登録してください。");
+			return form();
+		}
+		
 		memberService.save(member);
 		return "redirect:/";
 	}

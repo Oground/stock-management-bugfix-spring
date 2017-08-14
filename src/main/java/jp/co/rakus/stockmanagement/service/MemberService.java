@@ -4,6 +4,9 @@ import jp.co.rakus.stockmanagement.domain.Member;
 import jp.co.rakus.stockmanagement.repository.MemberRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.stereotype.Service;
 
 /**
@@ -24,6 +27,10 @@ public class MemberService {
 //	public Member findOne(Integer id) {
 //		return memberRepository.findOne(id);
 //	}
+	
+	public Member findByMailAddress(String mailAddress) {
+		return memberRepository.findByMailAddress(mailAddress);
+	}
 	
 	public Member findOneByMailAddressAndPassword(String mailAddress, String password){
 		return memberRepository.findByMailAddressAndPassword(mailAddress, password);

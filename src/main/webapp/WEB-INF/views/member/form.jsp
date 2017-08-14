@@ -21,6 +21,7 @@
 			      	メールアドレス
 			    </th>
 			    <td>
+			    	<c:if test="${emailError != null}"><c:out value="${emailError}"/><br></c:if>
 			    	<form:errors path="mailAddress" cssStyle="color:red" element="div"/>
 			    	<form:input path="mailAddress" placeholder="Email"/>
 			    </td>
