@@ -4,6 +4,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.StandardPasswordEncoder;
+import org.springframework.security.web.bind.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import jp.co.rakus.stockmanagement.domain.Member;
+import jp.co.rakus.stockmanagement.service.LoginUserDetails;
 import jp.co.rakus.stockmanagement.service.MemberService;
 
 /**
@@ -29,7 +31,7 @@ public class LoginController {
 
 	@Autowired
 	private StandardPasswordEncoder standardPasswordEncoder;
-	
+
 	@Autowired
 	private HttpSession session;
 
@@ -60,7 +62,7 @@ public class LoginController {
 	 */
 	@RequestMapping(value = "/login")
 	public String login(@Validated LoginForm form,
-			BindingResult result, Model model) {
+			BindingResult result, Model model, @AuthenticationPrincipal LoginUserDetails loginUserDetails) {
 		if (result.hasErrors()){
 			return index();
 		}
