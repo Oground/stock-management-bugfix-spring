@@ -90,7 +90,7 @@
 			</table>
 		</div>
 	</div>
-	<form:form action="/booklist">
+	<form:form action="/book/list">
 	<input type="submit" value="戻る">
 	</form:form>
 </div>
