@@ -56,6 +56,14 @@ public class BookRepository {
 		return book;
 	}
 	
+	public Book save(Book book) {
+		SqlParameterSource param = new BeanPropertySqlParameterSource(book);
+		jdbcTemplate.update(
+				"INSERT INTO books (id, name, author, publisher, price, isbncode, saledate, explanation, image, stock) VALUES (:id, :name, :author, :publisher, :price, :isbncode, :saledate, :explanation, :image, :stock)",
+				param);
+		return book;
+	}
+
 	public Book update(Book book) {
 		SqlParameterSource param = new BeanPropertySqlParameterSource(book);
 		if (book.getId() == null) {
