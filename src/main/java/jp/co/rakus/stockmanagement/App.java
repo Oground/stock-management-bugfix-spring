@@ -14,9 +14,4 @@ public class App {
         SpringApplication.run(App.class, args);
     }
     
-	@Bean
-    public StandardPasswordEncoder encorder(){
-    	return new StandardPasswordEncoder();
-    }
-    
 }

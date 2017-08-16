@@ -1,23 +1,23 @@
 package jp.co.rakus.stockmanagement.web;
 
-import javax.servlet.http.HttpSession;
+//import javax.servlet.http.HttpSession;
 
-import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.StandardPasswordEncoder;
-import org.springframework.security.web.bind.annotation.AuthenticationPrincipal;
+//import org.springframework.beans.BeanUtils;
+//import org.springframework.beans.factory.annotation.Autowired;
+//import org.springframework.security.crypto.password.StandardPasswordEncoder;
+//import org.springframework.security.web.bind.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
-import org.springframework.validation.annotation.Validated;
+//import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import jp.co.rakus.stockmanagement.domain.Member;
-import jp.co.rakus.stockmanagement.service.LoginUserDetails;
-import jp.co.rakus.stockmanagement.service.MemberService;
+//import jp.co.rakus.stockmanagement.domain.Member;
+//import jp.co.rakus.stockmanagement.service.LoginUserDetails;
+//import jp.co.rakus.stockmanagement.service.MemberService;
 
 /**
  * ログイン関連処理を行うコントローラー.
@@ -53,7 +53,6 @@ public class LoginController {
 	@RequestMapping("/")
 	public String index(LoginForm form, BindingResult result, Model model, @RequestParam(required = false) String error) {
 		if(error != null){
-			System.err.println("member: login failed");
 			result.addError(new ObjectError("loginError", "メールアドレスまたはパスワードが不正です"));
 		}
 		return "loginForm";

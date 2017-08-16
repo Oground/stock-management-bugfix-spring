@@ -13,7 +13,7 @@ public class LoginUserDetails extends org.springframework.security.core.userdeta
 	private final Member member;
 
 	public LoginUserDetails(Member member){
-		super(member.getName(), member.getPassword(), AuthorityUtils.createAuthorityList("ROLE_USER"));
+		super(member.getName(), member.getPassword(), AuthorityUtils.createAuthorityList("ROLE_MEMBER"));
 		this.member = member;
 	}
 

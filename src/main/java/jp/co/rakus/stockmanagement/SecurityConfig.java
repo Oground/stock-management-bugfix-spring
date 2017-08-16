@@ -33,7 +33,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		http.formLogin().loginProcessingUrl("/login").loginPage("/").failureUrl("/?error=true").defaultSuccessUrl("/book/list", false)
 		.usernameParameter("mailAddress").passwordParameter("password");
 		
-		http.logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout**"))
+		http.logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout/**"))
 		.logoutSuccessUrl("/")
 		.deleteCookies("JSESSIONID")
 		.invalidateHttpSession(true);
