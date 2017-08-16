@@ -1,6 +1,7 @@
 package jp.co.rakus.stockmanagement.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import jp.co.rakus.stockmanagement.domain.Member;
@@ -15,7 +16,10 @@ import jp.co.rakus.stockmanagement.repository.MemberRepository;
 public class MemberService {
 
 	@Autowired
-	MemberRepository memberRepository;
+	private MemberRepository memberRepository;
+	
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 
 //	public List<Member> findAll(){
 //		return memberRepository.findAll();
@@ -35,6 +39,11 @@ public class MemberService {
 
 	public Member save(Member member){
 		return memberRepository.save(member);
+	}
+	
+	public String encodePassword(String rowPassword){
+		String encodedPassword = passwordEncoder.encode(rowPassword);
+		return encodedPassword;
 	}
 
 //	public Member update(Member member){

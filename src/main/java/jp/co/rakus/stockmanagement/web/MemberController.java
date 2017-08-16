@@ -27,8 +27,8 @@ public class MemberController {
 	@Autowired
 	private MemberService memberService;
 	
-	@Autowired
-	private StandardPasswordEncoder standardPasswordEncoder;
+//	@Autowired
+//	private StandardPasswordEncoder standardPasswordEncoder;
 	
 	/**
 	 * フォームを初期化します.
@@ -57,26 +57,25 @@ public class MemberController {
 	 */
 	@RequestMapping(value = "create")
 	public String create(@Validated MemberForm form, BindingResult result, Model model) {
-		Member member = new Member();
 		
-		BeanUtils.copyProperties(form, member);
-		String password = standardPasswordEncoder.encode(form.getPassword());
-		member.setPassword(password);
+		if(!form.getPassword().equals(form.getCheckPassword())){
+			result.rejectValue("password", null, "入力されたパスワードとパスワード(確認用)が異なっています。再度入力し直してください。");
+		}
 		
-		Member checkMember = memberService.findByMailAddress(member.getMailAddress());
+		Member checkMember = memberService.findByMailAddress(form.getMailAddress());
 		
 		if(checkMember != null){
 			result.rejectValue("mailAddress", null, "既に登録されているメールアドレスです。他のメールアドレスを登録してください。");
-		}
-		
-		if(!standardPasswordEncoder.matches(form.getCheckPassword(), password)){
-			result.rejectValue("password", null, "入力されたパスワードとパスワード(確認用)が異なっています。再度入力し直してください。");
 		}
 		
 		if(result.hasErrors()){
 			return form();			
 		}
 		
+		form.setPassword(memberService.encodePassword(form.getPassword()));
+		
+		Member member = new Member();
+		BeanUtils.copyProperties(form, member);
 		memberService.save(member);
 		return "redirect:/";
 	}
